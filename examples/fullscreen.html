@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>workflow-designer</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+	<script src="../workflow-designer.js"></script>
+	<link href="../workflow-designer.css" rel="stylesheet" />
+
+	<style>
+		html, body {padding: 0; margin: 0; background: #050014; font-family: Arial;}
+		html, body, #container {width: 100%; height: 100%; overflow: hidden;}
+
+		.toolbox {position: absolute; left: 0; top: 0; z-index: 2;}
+	</style>
+</head>
+<body>
+	<div class="toolbox">
+		<button id="addButton">Add</button>
+		<button id="danceButton">Dance</button>
+		<button id="readonlyButton">Readonly</button>
+		<button id="exportButton">Export</button>
+		<button id="clearButton">Clear</button>
+	</div>
+
+	<div id="container">
+	</div>
+
+	<script>
+		const container = document.getElementById('container');
+		const designer = new DesignerHost({
+			container: container,
+			theme: 'dark'
+		});
+		designer.setup();
+
+		designer.addActivites([
+			{
+				left: 100,
+				top: 100,
+				color: '#FFB900',
+				name: 'Start',
+				label: 'Start',
+				isInvalid: false,
+				canDelete: false,
+				inputNames: [],
+				outputNames: ['started']
+			},
+			{
+				left: 200,
+				top: 400,
+				color: '#FFB900',
+				name: 'Finish',
+				label: 'Finish',
+				isInvalid: false,
+				canDelete: false,
+				inputNames: ['in'],
+				outputNames: []
+			},
+			{
+				left: 200,
+				top: 200,
+				color: '#00FF1A',
+				name: 'If',
+				label: 'Has X',
+				isInvalid: true,
+				canDelete: true,
+				inputNames: ['in'],
+				outputNames: ['true', 'false']
+			},
+			{
+				left: 300,
+				top: 300,
+				color: '#00D1FF',
+				name: 'SendEmail',
+				label: 'Send email',
+				isInvalid: false,
+				canDelete: true,
+				inputNames: ['in'],
+				outputNames: ['done']
+			},
+			{
+				left: 100,
+				top: 300,
+				color: '#00D1FF',
+				name: 'SendEmail2',
+				label: 'Open X',
+				isInvalid: false,
+				canDelete: true,
+				inputNames: ['in'],
+				outputNames: ['done']
+			}
+		]);
+		designer.addConnections([
+			{
+				outputActivityName: 'Start',
+				outputName: 'started',
+				inputActivityName: 'If',
+				inputName: 'in'
+			}
+		]);
+
+		designer.onEditRequested.addListener(function(name) {
+			designer.updateActivity({
+				name: name,
+				label: 'Lorem ipsum sit dolor ' + Math.round(Math.random() * 1000),
+				color: '#DB03CE',
+				isInvalid: Math.random() > 0.5,
+				canDelete: true
+			});
+		});
+
+		document.getElementById('addButton').addEventListener('click', function() {
+			const pos = designer.getPositionForNewActivity();
+			const label = prompt('Enter name:');
+			const inputs = prompt('Inputs:');
+			const outputs = prompt('Outputs:');
+			if (label && inputs && outputs) {
+				designer.addActivites([{
+					left: pos.left,
+					top: pos.top,
+					color: '#00D1FF',
+					name: label,
+					label: label,
+					isInvalid: false,
+					canDelete: true,
+					inputNames: inputs.split(','),
+					outputNames: outputs.split(',')
+				}]);
+			}
+		});
+
+		document.getElementById('danceButton').addEventListener('click', function(e) {
+			e.target.setAttribute('disabled', '');
+			const a = designer.getActivities();
+			let index = 0;
+			function dance() {
+				index = (index + 1) % a.length;
+				const name = a[index].name;
+				designer.selectActivity(name);
+				designer.scrollToActivity(name, 100);
+			}
+			setInterval(dance, 1000);
+			dance();
+		});
+
+		document.getElementById('readonlyButton').addEventListener('click', function() {
+			designer.setIsReadOnly(!designer.isReadOnly());
+		});
+
+		document.getElementById('exportButton').addEventListener('click', function() {
+			const a = designer.getActivities();
+			const c = designer.getConnections();
+			console.log(a);
+			console.log(c);
+		});
+
+		document.getElementById('clearButton').addEventListener('click', function() {
+			designer.clear();
+		});
+	</script>
+</body>
+</html>

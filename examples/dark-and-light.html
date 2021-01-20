@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>workflow-designer</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+	<script src="../workflow-designer.js"></script>
+	<link href="../workflow-designer.css" rel="stylesheet" />
+
+	<style>
+		body {font-family: monospace;}
+		.container {width: 500px; height: 500px; display: inline-block;}
+	</style>
+</head>
+<body>
+	<div class="container" id="container1"></div>
+	<div class="container" id="container2"></div>
+
+	<script>
+		function rand(min, max) {
+			return Math.floor(Math.random() * (max - min + 1) + min);
+		}
+
+		function setup(id, theme) {
+			const container = document.getElementById(id);
+			const designer = new DesignerHost({
+				container: container,
+				theme: theme
+			});
+			designer.setup();
+			designer.addActivites([
+				{
+					left: rand(100, 150),
+					top: 100,
+					color: '#FFB900',
+					name: 'Start',
+					label: 'Start',
+					isInvalid: false,
+					canDelete: false,
+					inputNames: [],
+					outputNames: ['started']
+				},
+				{
+					left: rand(100, 250),
+					top: 200,
+					color: '#00D1FF',
+					name: 'SetVariable',
+					label: 'SetVariable',
+					isInvalid: false,
+					canDelete: true,
+					inputNames: ['input'],
+					outputNames: ['set']
+				}
+			]);
+			designer.addConnections([
+				{
+					outputActivityName: 'Start',
+					outputName: 'started',
+					inputActivityName: 'SetVariable',
+					inputName: 'input'
+				}
+			]);
+
+			designer.onEditRequested.addListener(function (name) {
+				const def = JSON.stringify(designer.getActivity(name));
+				alert(def);
+			});
+		}
+
+		setup('container1', 'light');
+		setup('container2', 'dark');
+	</script>
+</body>
+</html>
