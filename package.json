@@ -6,7 +6,8 @@
 		"start": "webpack --watch",
 		"build": "webpack",
 		"lint": "tslint --project tsconfig.json",
-		"test": "karma start"
+		"test": "karma start",
+		"test:single": "karma start --single-run --browsers=ChromeHeadless"
 	},
 	"license": "MIT",
 	"devDependencies": {
