@@ -178,7 +178,7 @@ class ActivityView {
 			});
 		} else {
 			setAttrs(this.warnIconLayer, {
-				'visibility': 'collapse'
+				'visibility': 'hidden'
 			});
 		}
 
