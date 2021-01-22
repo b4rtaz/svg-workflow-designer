@@ -1,6 +1,6 @@
 {
 	"name": "svg-workflow-designer",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"author": "Bartlomiej Tadych (http://n4no.com)",
 	"main": "build/designer-host.js",
 	"types": "build/designer-host.d.ts",
