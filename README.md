@@ -15,6 +15,8 @@ Features:
 - supports IE9 😨,
 - light/dark themes.
 
+⭐ Check [online demo](https://b4rtaz.github.io/svg-workflow-designer/examples/fullscreen.html).
+
 ## ✨ Installation
 
 ### NPM
@@ -34,7 +36,7 @@ import { DesignerHost } from 'svg-workflow-designer';
 
 ## 👀 Examples of Use
 
-Check [examples](/examples) directory (you must build the project before).
+Check [examples](/examples) directory.
 
 ```js
 const designer = new DesignerHost({
