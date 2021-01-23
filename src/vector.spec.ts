@@ -1,6 +1,6 @@
 import { Vector } from './vector';
 
-describe('Vector2', () => {
+describe('Vector', () => {
 
 	const A = new Vector(2, 10);
 

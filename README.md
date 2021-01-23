@@ -2,11 +2,11 @@
 
 # SVG Workflow Designer
 
-[![Build Status](https://travis-ci.com/b4rtaz/workflow-designer.svg?branch=master)](https://travis-ci.com/b4rtaz/workflow-designer) [![License: MIT](https://img.shields.io/github/license/mashape/apistatus.svg)](/LICENSE)
+[![Build Status](https://travis-ci.com/b4rtaz/svg-workflow-designer.svg?branch=master)](https://travis-ci.com/b4rtaz/svg-workflow-designer) [![License: MIT](https://img.shields.io/github/license/mashape/apistatus.svg)](/LICENSE)
 
 Workflow designer with no dependencies. It's written in TypeScript, but you may use it in a JavaScript project too. This project is not associated with any Workflow Engine. You can use it to integrate it with what you want.
 
-Features:
+🔥 **Features:**
 
 - no dependencies,
 - uses SVG for rendering,
@@ -15,7 +15,10 @@ Features:
 - supports IE9 😨,
 - light/dark themes.
 
-⭐ Check [online demo](https://b4rtaz.github.io/svg-workflow-designer/examples/fullscreen.html).
+⭐ **Demos:**
+
+- [Fullscreen](https://b4rtaz.github.io/svg-workflow-designer/examples/fullscreen.html)
+- [Dark and Light](https://b4rtaz.github.io/svg-workflow-designer/examples/dark-and-light.html)
 
 ## ✨ Installation
 
@@ -32,6 +35,13 @@ After this, you can import this library:
 ```js
 import 'svg-workflow-designer/workflow-designer.css';
 import { DesignerHost } from 'svg-workflow-designer';
+```
+
+### CDN
+
+```html
+<script src="//cdn.jsdelivr.net/npm/svg-workflow-designer/workflow-designer.js"></script>
+<link href="//cdn.jsdelivr.net/npm/svg-workflow-designer/workflow-designer.css" rel="stylesheet" />
 ```
 
 ## 👀 Examples of Use
